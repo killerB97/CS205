@@ -1,25 +1,25 @@
 
 
 object Q4 {
-    def sortInsert(e : Integer, lst : List[Int]) : List[Int] = {
-      def sortInsert1(xs: List[Int]) : List[Int] = xs match {
-        case Nil => List(e)
-        case x :: xs if e < x => e :: x :: xs        
-        case x :: xs => x :: sortInsert1(xs)               
-      }   
-      return sortInsert1(lst)
+
+  def sortInsert(Lst: List[Int], n: Int): List[Int]= Lst match {
+    case Nil => n::Lst
+    case head::rest if head > n => n::Lst
+    case head::rest => head::sortInsert(rest,n) 
+   
   }
   
-  def insertionSort(originalList: List[Int]) : List[Int] = {
-      def insertionSort1(xs: List[Int], lst: List[Int]) : List[Int] = xs match {
-        case Nil => lst
-        case x :: xs => insertionSort1(xs, sortInsert(x, lst))
+  
+      def insertionSort(xs: List[Int]) : List[Int] = xs match {
+        case Nil => Nil
+        case head :: tail => sortInsert(insertionSort(tail), head)
       }
-      insertionSort1(originalList, List())
-  }
+        
+  
   
   def main(args: Array[String]): Unit = {
-    var Lst= List(4,1,48,2,23,15)
+    var Lst= List(4,48,23,15,1,3)
     println(insertionSort(Lst))
+    
   }
 }
